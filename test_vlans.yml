@@ -1,9 +1,7 @@
 
-# VLANs 
+##Cisco
 
 # - name: create vlans on cisco ios
-
-##Cisco
 
 ### Feedback
 - name: create vlans on cisco ios
@@ -30,7 +28,13 @@
     state: merged
 
 
+##Juniper
 
+# - name: create vlans on cisco ios
 
+### Feedback
+- name: create vlans on cisco ios
+
+### Expected
 
 
