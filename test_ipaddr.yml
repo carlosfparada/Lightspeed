@@ -1,0 +1,40 @@
+
+##Cisco
+
+# - name: set ip addresses on cisco ios
+
+### Feedback
+- name: config ip addresses on cisco ios
+  ansible.builtin.network:
+    config: "{{ item }}"
+    state: present
+  with_items: "{{ ip_address }}"
+  when: item.ip_address is defined
+
+
+
+
+
+
+
+### Expected
+
+
+##Juniper
+
+# - name: create vlans on junos
+
+### Feedback
+
+
+### Expected
+
+- name: create vlans on junos
+  vars:
+    vlans:
+    - name: VLAN100
+      vlan_id: 100
+      description: My VLAN100 description
+  junipernetworks.junos.junos_vlans:
+    config: "{{ juniper_vlans }}"
+    state: merged 
