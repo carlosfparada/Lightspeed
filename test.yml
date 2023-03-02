@@ -1,61 +1,23 @@
+
+# VLANs 
+
 # - name: create vlans on cisco ios
 
-#1
-- name: create vlans on cisco ios
-  ansible.builtin.gather_facts: false
-  hosts: cisco
-  tasks:
-  - name: Create VLAN on cisco ios
-    cisco.ios.ios_vlans:
-      state: present
-      config:
-      - name: new_vlan
-        vlan_id: 100
-        state: present
+##Cisco
 
-#2
-- name: create vlans on cisco ios
-  ansible.builtin.cli_config:
-    config: ip address {{ ansible_net_hostname }} vlan {{ ansible_net_hostname }} vlan {{
-      ansible_net_hostname }}
-    diff_mode: modified
-  vars:
-    ansible_connection: ansible.netcommon.network_cli
-
-#3
+### Feedback
 - name: create vlans on cisco ios
   cisco.ios.ios_vlans:
     config:
-      - name: vlan99
-        vlan_id: 201
+      - name: vlan2
+        vlan_id: 2
         state: overridden
     state: merged
   tags:
     - always
   register: _vlans_output
 
-
-
-
-
-
-
-- name: set cisco ios ip address
-  ansible.builtin.template:
-    src: ios.j2
-    dest: ip address{{ ansible_net_hostname }}
-    diff_mode: modified
-  vars:
-    ansible_connection: ansible.netcommon.network_cli
-
-
-  cisco.ios.ios_config:
-    lines:
-      - ip address {{ _os_router_address }}
-
-
-
-######## EXPECTED ########
+### Expected
 
 - name: create cisco ios vlans
   vars:
