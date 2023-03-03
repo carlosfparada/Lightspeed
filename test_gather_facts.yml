@@ -1,51 +1,39 @@
 
 ##Cisco
 
-# - name: set ip addresses on cisco ios
+# - name: get facts from junos
 
 ### Feedback
 
-- name: config ip addresses on cisco ios
-  ansible.builtin.network:
-    config: "{{ item }}"
-    state: present
-  with_items: "{{ ip_address }}"
-  when: item.ip_address is defined
+- name: get facts from cisco ios
+  cisco.ios.ios_facts:
+    gather_subset: '{{ gather_subset }}'
+  when: ansible_network_os == 'ios'
 
 ### Expected
 
-- name: config ip addresses on cisco ios
-  vars:
-    ipaddr:
-    - name: Ethernet0/2
-      ipv4:
-      - address: 10.10.10.10/24
-      - secondary: no
-  cisco.ios.ios_l3_interfaces:
-    config: "{{ ipaddr }}"
-    state: merged
+- name: get facts from cisco ios
+  var:
+    gather_subset: all
+  cisco.ios.ios_facts:
+    gather_subset: '{{ gather_subset }}'
 
 ##Juniper
 
-# - name: config ip addresses on junos
+# - name: get facts from junos
 
 ### Feedback
-- name: config ip addresses on junos
-  junipernetworks.junos.junos_config:
-    lines:
-    - set system host-name {{ inventory_hostname }}
-    - set system domain-name {{ version }}
-  when: ansible_facts.junos_version != "STRICT"
+
+- name: get facts from junos
+  junipernetworks.junos.junos_facts:
+    gather_subset: '{{ gather_subset }}'
+  when: ansible_network_os == 'junos'
+
 
 ### Expected
 
-- name: config ip addresses on junos
-  vars:
-    ipaddr:
-      - name: 'xe-0/0/0:1'
-        unit: 0
-        ipv4:
-        - address: 10.10.10.10/24
-  junipernetworks.junos.junos_l3_interfaces:
-    config: "{{ ipaddr }}"
-    state: merged
+- name: get facts from junos
+  var:
+    gather_subset: all
+  junipernetworks.junos.junos_facts:
+    gather_subset: '{{ gather_subset }}'
