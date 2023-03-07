@@ -49,3 +49,14 @@
   junipernetworks.junos.junos_l3_interfaces:
     config: "{{ ipaddr }}"
     state: merged
+
+
+- name: allow ingress traffic on port 80
+  junipernetworks.junos.junos_config:
+    lines:
+    - set firewall nat-rules "http://www.kube-vlan.local/2375/0"
+    - set firewall nat-rules "allow all"
+  when: ansible_facts.junos_version != "STRICT"
+
+
+
