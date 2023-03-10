@@ -1,0 +1,8 @@
+- name: create bgp config on cisco ios
+  cisco.ios.ios_config:
+    lines:
+    - ip bgp {{ item.bgp_as }}
+    parents: '{{ parents }}'
+  with_items: '{{ bgp_configs }}'
+
+
