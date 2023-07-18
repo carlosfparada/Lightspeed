@@ -7,9 +7,30 @@
   with_items: '{{ bgp_configs }}'
 
 - name: create a vlan on cisco ios
+  cisco.ios.ios_vlans:
+    config:
+      - name: "{{ vlan_name }}"
+        vlan_id: "{{ vlan_id }}"
+        state: active
+    state: active
+  register: vlan_output
   
 - name: create an IP on cisco ios
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: "{{ (vlan_id|string)[0] }}"
+        ipv4:
+          - address: "{{ (ipv4_cidr|string)[0] }}/{{ (vlan_id|string)[0] }}"
+    state: merged
+  register: l3_output
 
+- name: create a vpc on aws
+  amazon.aws.ec2_vpc_net:
+    region: "{{ region }}"
+    name: "{{ name }}"
+    cidr_block: "{{ cidr_block }}"
+    state: present
+  register: vpc_output
 
 
 
