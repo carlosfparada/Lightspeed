@@ -1,3 +1,4 @@
+# https://docs.ai.ansible.redhat.com/vscode_guide/installing_vs/#configuring-the-ansible-vs-code-extension
 - name: create bgp config on cisco ios
   cisco.ios.ios_config:
     lines:
@@ -13,8 +14,6 @@
         state: active
     state: active
   register: vlan_output
-
-  
 
 
 
