@@ -7,15 +7,8 @@
   with_items: '{{ bgp_configs }}'
 
 - name: create a vlan on cisco ios
-  cisco.ios.ios_vlans:
-    config:
-      - name: "{{ vlan_name }}"
-        vlan_id: "{{ vlan_id }}"
-        state: active
-    state: active
-  register: vlan_output
-
-
+  
+- name: create an IP on cisco ios
 
 
 
