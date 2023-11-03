@@ -32,6 +32,20 @@
     state: present
   register: vpc_output
 
+- name: create a subnet
+  amazon.aws.ec2_vpc_subnet:
+    region: "{{ region }}"
+    state: present
+    vpc_id: "{{ _vpc_id_ }}"
+    cidr: "{{ _cidr_ }}"
+    map_public: true
+    resource_tags:
+      Name: "{{ subnet_name }}"
+  register: subnet_output
+
+- name: create aws igw
+
+
 
 
 
