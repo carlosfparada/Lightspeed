@@ -44,6 +44,14 @@
   register: subnet_output
 
 - name: create aws igw
+  amazon.aws.ec2_vpc_igw:
+    vpc_id: "{{ _vpc_id_ }}"
+    region: "{{ region }}"
+    state: present
+    tags:
+      Name: "{{ igw_name }}"
+  register: igw_output
+
 
 
 

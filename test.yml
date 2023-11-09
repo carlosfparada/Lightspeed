@@ -1,0 +1,17 @@
+- name: Cisco config
+  hosts: cisco
+  tasks:
+    - name: create vlan
+      cisco.ios.ios_vlans:
+        config:
+          - name: "{{ vlan_name }}"
+            vlan_id: "{{ vlan_id }}"
+        state: merged
+
+    - name: create cisco nxos vlan
+      cisco.nxos.nxos_vlans:
+        config:
+          - name: "{{ vlan_name }}"
+            vlan_id: "{{ vlan_id }}"
+        state: merged
+    
