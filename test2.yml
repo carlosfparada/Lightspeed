@@ -1,0 +1,20 @@
+- name: Config Cisco ios
+  hosts: cisco
+  tasks:
+     - name: create vlan
+       cisco.ios.ios_vlans:
+         config:
+           - name: VL-3
+             vlan_id: '201'
+           - name: VL-4
+             vlan_id: '202'
+             shutdown: enabled
+           - name: VL-5
+             vlan_id: '203'
+             shutdown: disabled
+         state: merged
+- name: create vlan with variables
+
+
+
+     
