@@ -1,3 +1,4 @@
+---
 - name: Config Cisco ios
   hosts: cisco
   tasks:
@@ -17,6 +18,3 @@
         port: 22/tcp
         permanent: true
         state: enabled
-    
-
-

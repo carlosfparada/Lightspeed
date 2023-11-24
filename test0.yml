@@ -1,5 +1,4 @@
 ---
-
 - name: AWS RHEL Deployment
   hosts: aws
   tasks:
@@ -40,7 +39,7 @@
         subnets:
           - "{{ subnet.subnet.id }}"
         routes:
-          - dest: 0.0.0.0/0
+          - dest: "0.0.0.0/0"
             gateway_id: "{{ igw.gateway_id }}"
         tags:
           Name: "{{ _name }}"
@@ -56,12 +55,12 @@
           - proto: tcp
             ports:
               - 80
-            cidr_ip: 0.0.0.0/0
+            cidr_ip: "0.0.0.0/0"
             rule_desc: allow all on port 80
           - proto: tcp
             ports:
               - 22
-            cidr_ip: 0.0.0.0/0
+            cidr_ip: "0.0.0.0/0"
             rule_desc: allow all on port 22
     - name: create rhel instance
       amazon.aws.ec2_instance:
@@ -97,9 +96,3 @@
         name: httpd
         state: started
         enabled: true
-    
-    
-
-
-
-    

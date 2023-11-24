@@ -1,3 +1,4 @@
+---
 - name: Migrate F5 vips to Cisco
   hosts: f5
   tasks:
@@ -11,4 +12,3 @@
         commands: show running-pools
       delegate_to: localhost
       register: pools
-    
