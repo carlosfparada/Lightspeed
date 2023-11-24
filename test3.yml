@@ -1,0 +1,22 @@
+- name: Config Cisco ios
+  hosts: cisco
+  tasks:
+    # install postgres server & start postgres service
+    - name: Install postgres server
+      ansible.builtin.package:
+        name: postgresql-server
+        state: present
+
+    - name: Start postgres service
+      ansible.builtin.service:
+        name: postgresql
+        state: started
+        enabled: true
+    - name: open port 22 at firewall
+      ansible.posix.firewalld:
+        port: 22/tcp
+        permanent: true
+        state: enabled
+    
+
+
