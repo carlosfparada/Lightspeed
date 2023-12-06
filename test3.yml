@@ -1,5 +1,0 @@
-- name: Config Cisco ios
-  hosts: cisco
-  tasks:
-    # install postgres server & start postgres service
-    
