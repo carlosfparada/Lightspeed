@@ -1,5 +1,4 @@
 ---
-
 - name: AWS RHEL Deployment
   hosts: aws
   tasks:
