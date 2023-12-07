@@ -3,15 +3,4 @@
 - name: AWS RHEL Deployment
   hosts: aws
   tasks:
-    - name: create vpc
-      amazon.aws.ec2_vpc_net:
-        name: "{{ _name_ }}"
-        cidr_block: "{{ _cidr_block_ }}"
-        state: present
-        tags:
-          Name: "{{ vpc_name }}"
-          Environment: "{{ env_name }}"
-          Project: "{{ project_name }}"
-          CreatedBy: "{{ user }}"
-      register: vpc_result
     
