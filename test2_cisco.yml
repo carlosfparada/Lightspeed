@@ -2,30 +2,7 @@
 
 - name: Cisco IOS configuration
   hosts: cisco
-  vars:
-    int_name: ethernet0
-    int_ip: 1.1.1.1
   tasks:
-    - name: create vlan with variables
-      cisco.ios.ios_vlan:
-        name: "{{ vlan_name }}"
-        vlan_id: "{{ vlan_id }}"
-        state: present
-      register: result
-    - name: set ip address
-      cisco.ios.ios_l3_interface:
-        name: "{{ int_name }}"
-        ipv4: "{{ int_ip }}"
-        state: present
-      register: result
     
 
     
-
-    
-
-
-
-
-
-
