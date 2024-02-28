@@ -3,13 +3,6 @@
 - name: F5 configuration
   hosts: f5
   tasks:
-    #- name: create f5 node
-    
-    #- name: create f5 pool
-    
-    #- name: create f5 virtual server
-
-    
 
 
 
