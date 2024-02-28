@@ -1,0 +1,8 @@
+---
+
+- name: F5 configuration
+  hosts: panos
+  tasks:
+    - name: create f5 node
+    
+
