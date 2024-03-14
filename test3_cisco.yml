@@ -5,11 +5,8 @@
   vars:
     vlan_id: "vlan101"
   tasks:
-    - name: create a vlan in cisco ios use variable vlan_id
-      cisco.ios.ios_vlan:
-        name: "{{ vlan_id }}"
-        state: present
-      register: result
+    # - name: create a vlan in cisco ios use variable vlan_id
+
     
 
 

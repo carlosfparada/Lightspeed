@@ -3,31 +3,12 @@
 - name: Paloalto configuration
   hosts: panos
   tasks:
-    - name: create panos security rule
-      paloaltonetworks.panos.panos_security_rule:
-        provider: "{{ _provider_ }}"
-        description: "{{ _description_ }}"
-        source_zone: "{{ _source_zone_ }}"
-        source_ip: "{{ _source_ip_ }}"
-        destination_zone: "{{ _destination_zone_ }}"
-        destination_ip: "{{ _destination_ip_ }}"
-        action: "{{ _action_ }}"
-        state: "{{ _state_ }}"
+    # - name: create panos security rule
     
 
-
-    - name: create panos security rule with destination ip 1.1.1.1 port 443
-      paloaltonetworks.panos.panos_security_rule:
-        provider: "{{ _provider_ }}"
-        description: "{{ _description_ }}"
-        source_zone: "{{ _source_zone_ }}"
-        source_ip: "{{ _source_ip_ }}"
-        destination_zone: "{{ _destination_zone_ }}"
-        destination_ip: 1.1.1.1
-        action: "{{ _action_ }}"
-        state: "{{ _state_ }}"
+    # - name: create panos security rule with destination ip 1.1.1.1 port 443
     
 
-    - name: create panos security rule with destination ip 1.1.1.1 port 443 with full parameters
-    
+    # - name: create panos security rule with destination ip 1.1.1.1 port 443 with full parameters
+
 
