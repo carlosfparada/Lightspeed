@@ -2,4 +2,75 @@
 
 - name: AWS RHEL Deployment
   hosts: aws
+  vars: 
+    subnet_name: "mysubnet"
   tasks: 
+    - name: create vpc
+      amazon.aws.ec2_vpc_net:
+        name: "{{ _name_ }}"
+        cidr_block: "{{ _cidr_block_ }}"
+        state: present
+        tags:
+          Name: "{{ vpc_name }}"
+          Environment: "{{ env_name }}"
+          Project: "{{ project_name }}"
+          CreatedBy: "{{ user }}"
+      register: vpc_result
+    - name: create a subnet
+      amazon.aws.ec2_vpc_subnet:
+        cidr: "{{ _cidr_ }}"
+        az: "{{ _az_ }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        state: present
+        tags:
+          Name: "{{ subnet_name }}"
+          Environment: "{{ env_name }}"
+          Project: "{{ project_name }}"
+          CreatedBy: "{{ user }}"
+      register: subnet_result
+    - name: create an igw
+      amazon.aws.ec2_vpc_igw:
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        state: present
+      register: igw_result
+    - name: create a routing table with igw as default router
+      amazon.aws.ec2_vpc_route_table:
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        tags:
+          Name: "{{ route_table_name }}"
+        subnets:
+          - "{{ subnet_result.subnet.id }}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ igw_result.gateway_id }}"
+      register: route_table_result
+    - name: create sg and open port 80
+      amazon.aws.ec2_security_group:
+        name: "{{ _name_ }}"
+        description: "{{ _description_ }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+      register: sg_result
+    - name: deploy an rhel instance
+      amazon.aws.ec2_instance:
+        key_name: "{{ _key_name_ }}"
+        instance_type: "{{ _instance_type_ }}"
+        image_id: "{{ _image_id_ }}"
+        vpc_subnet_id: "{{ subnet_result.subnet.id }}"
+        security_group: "{{ sg_result.group_id }}"
+        volumes:
+          - device_name: /dev/sda1
+            volume_type: gp2
+            volume_size: "{{ root_disk_size }}"
+            delete_on_termination: true
+        wait: true
+        wait_timeout: 600
+      register: ec2_result
+    
+
+
+    

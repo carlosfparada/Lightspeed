@@ -3,5 +3,26 @@
 - name: RHEL provisioning
   hosts: rhel9
   tasks:
+    - name: install httpd service
+      ansible.builtin.package:
+        name: httpd
+        state: present
+    - name: open firewall port 80 and 443
+      ansible.posix.firewalld:
+        port: '{{ item }}/tcp'
+        permanent: true
+        state: enabled
+        immediate: true
+      loop:
+        - 80
+        - 443
+    - name: make sure httpd is running with morre parameters
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+    
+    
+    
 
     
