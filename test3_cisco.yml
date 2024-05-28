@@ -2,10 +2,9 @@
 
 - name: Cisco IOS configuration
   hosts: cisco
-  vars:
-    vlan_id: "vlan101"
   tasks:
-    # - name: create a vlan in cisco ios use variable vlan_id
+
+
 
     
 

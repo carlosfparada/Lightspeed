@@ -2,18 +2,10 @@
 
 - name: AWS RHEL Deployment
   hosts: aws
-  vars: 
-    subnet_name: "mysubnet"
   tasks: 
-    # - name: create vpc
 
-    # - name: create a subnet
 
-    # - name: create an igw
 
-    # - name: create a routing table with igw as default router
 
-    # - name: create sg and open port 80
 
-    # - name: deploy an rhel instance
     
