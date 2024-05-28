@@ -1,4 +1,4 @@
-
+---
 ##Cisco
 
 # - name: create vlans on cisco ios
@@ -20,13 +20,12 @@
 - name: create cisco ios vlans
   vars:
     vlans:
-    - name: VLAN100
-      vlan_id: 100
-      state: active
+      - name: VLAN100
+        vlan_id: 100
+        state: active
   cisco.ios.ios_vlans:
     config: "{{ vlans }}"
     state: merged
-
 
 ##Juniper
 
@@ -37,9 +36,9 @@
 - name: create vlans on junos
   junipernetworks.junos.junos_config:
     lines:
-    - set vlans 1000 repo 100
-    - set vlans 1000 repo 100
-    - set vlans 1000 domain-name default
+      - set vlans 1000 repo 100
+      - set vlans 1000 repo 100
+      - set vlans 1000 domain-name default
   register: _vlans_output
 
 ### Expected
@@ -47,9 +46,9 @@
 - name: create vlans on junos
   vars:
     vlans:
-    - name: VLAN100
-      vlan_id: 100
-      description: My VLAN100 description
+      - name: VLAN100
+        vlan_id: 100
+        description: My VLAN100 description
   junipernetworks.junos.junos_vlans:
     config: "{{ juniper_vlans }}"
-    state: merged 
+    state: merged

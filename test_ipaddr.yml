@@ -1,4 +1,4 @@
-
+---
 ##Cisco
 
 # - name: set ip addresses on cisco ios
@@ -17,10 +17,10 @@
 - name: config ip addresses on cisco ios
   vars:
     ipaddr:
-    - name: Ethernet0/2
-      ipv4:
-      - address: 10.10.10.10/24
-      - secondary: no
+      - name: Ethernet0/2
+        ipv4:
+          - address: 10.10.10.10/24
+          - secondary: no
   cisco.ios.ios_l3_interfaces:
     config: "{{ ipaddr }}"
     state: merged
@@ -33,8 +33,8 @@
 - name: config ip addresses on junos
   junipernetworks.junos.junos_config:
     lines:
-    - set system host-name {{ inventory_hostname }}
-    - set system domain-name {{ version }}
+      - set system host-name {{ inventory_hostname }}
+      - set system domain-name {{ version }}
   when: ansible_facts.junos_version != "STRICT"
 
 ### Expected
@@ -42,21 +42,17 @@
 - name: config ip addresses on junos
   vars:
     ipaddr:
-      - name: 'xe-0/0/0:1'
+      - name: xe-0/0/0:1
         unit: 0
         ipv4:
-        - address: 10.10.10.10/24
+          - address: 10.10.10.10/24
   junipernetworks.junos.junos_l3_interfaces:
     config: "{{ ipaddr }}"
     state: merged
 
-
 - name: allow ingress traffic on port 80
   junipernetworks.junos.junos_config:
     lines:
-    - set firewall nat-rules "http://www.kube-vlan.local/2375/0"
-    - set firewall nat-rules "allow all"
+      - set firewall nat-rules "http://www.kube-vlan.local/2375/0"
+      - set firewall nat-rules "allow all"
   when: ansible_facts.junos_version != "STRICT"
-
-
-

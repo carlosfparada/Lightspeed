@@ -1,4 +1,4 @@
-
+---
 ##Cisco
 
 # - name: get facts from junos
@@ -7,7 +7,7 @@
 
 - name: get facts from cisco ios
   cisco.ios.ios_facts:
-    gather_subset: '{{ gather_subset }}'
+    gather_subset: "{{ gather_subset }}"
   when: ansible_network_os == 'ios'
 
 ### Expected
@@ -16,7 +16,7 @@
   var:
     gather_subset: all
   cisco.ios.ios_facts:
-    gather_subset: '{{ gather_subset }}'
+    gather_subset: "{{ gather_subset }}"
 
 ##Juniper
 
@@ -26,9 +26,8 @@
 
 - name: get facts from junos
   junipernetworks.junos.junos_facts:
-    gather_subset: '{{ gather_subset }}'
+    gather_subset: "{{ gather_subset }}"
   when: ansible_network_os == 'junos'
-
 
 ### Expected
 
@@ -36,4 +35,4 @@
   var:
     gather_subset: all
   junipernetworks.junos.junos_facts:
-    gather_subset: '{{ gather_subset }}'
+    gather_subset: "{{ gather_subset }}"

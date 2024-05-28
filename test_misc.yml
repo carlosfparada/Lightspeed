@@ -1,10 +1,11 @@
+---
 # https://docs.ai.ansible.redhat.com/vscode_guide/installing_vs/#configuring-the-ansible-vs-code-extension
 - name: create bgp config on cisco ios
   cisco.ios.ios_config:
     lines:
-    - ip bgp {{ item.bgp_as }}
-    parents: '{{ parents }}'
-  with_items: '{{ bgp_configs }}'
+      - ip bgp {{ item.bgp_as }}
+    parents: "{{ parents }}"
+  with_items: "{{ bgp_configs }}"
 
 - name: create a vlan on cisco ios
   cisco.ios.ios_vlans:
@@ -14,7 +15,7 @@
         state: active
     state: active
   register: vlan_output
-  
+
 - name: create an IP on cisco ios
   cisco.ios.ios_l3_interfaces:
     config:
@@ -51,11 +52,3 @@
     tags:
       Name: "{{ igw_name }}"
   register: igw_output
-
-
-
-
-
-
-
-

@@ -1,14 +1,7 @@
 ---
-
 - name: Paloalto configuration
   hosts: panos
   tasks:
     # - name: create panos security rule
-    
-
     # - name: create panos security rule with destination ip 1.1.1.1 port 443
-    
-
     # - name: create panos security rule with destination ip 1.1.1.1 port 443 with full parameters
-
-
