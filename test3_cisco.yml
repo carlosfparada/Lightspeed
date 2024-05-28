@@ -1,11 +1,4 @@
 ---
-
 - name: Cisco IOS configuration
   hosts: cisco
   tasks:
-
-
-
-    
-
-
