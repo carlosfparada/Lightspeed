@@ -1,0 +1,93 @@
+---
+- name: Create a vpc, subnet, igw, route table, sg, deploy a rhel machine, start it and wait until ssh is accessible.
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    region: us-east-1
+    keypair: ansible-key
+    instance_type: t2.micro
+    image: ami-0477b9335a5a75438
+    vpc_cidr: 10.0.0.60/16
+    subnet_cidr: 10.0.1.16/24
+    sg_name: ansible-sg
+    sg_description: Ansible security group
+    sg_rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: "0.0.0.0/0"
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: "0.0.0.0/0"
+    instance_name: ansible-instance
+    instance_tags:
+      Name: ansible-instance
+  tasks:
+    - name: Create a VPC
+      amazon.aws.ec2_vpc_net:
+        name: ansible-vpc
+        cidr_block: "{{ vpc_cidr }}"
+        region: "{{ region }}"
+        tags:
+          Name: ansible-vpc
+      register: vpc
+    - name: Create a subnet
+      amazon.aws.ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        cidr: "{{ subnet_cidr }}"
+        region: "{{ region }}"
+        tags:
+          Name: ansible-subnet
+      register: subnet
+    - name: Create an internet gateway
+      amazon.aws.ec2_vpc_igw:
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        tags:
+          Name: ansible-igw
+      register: igw
+    - name: Create a route table
+      amazon.aws.ec2_vpc_route_table:
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        subnets:
+          - "{{ subnet.subnet.id }}"
+        routes:
+          - dest: "0.0.0.0/0"
+            gateway_id: "{{ igw.gateway_id }}"
+        tags:
+          Name: ansible-route-table
+      register: route_table
+    - name: Create a security group
+      amazon.aws.ec2_security_group:
+        name: "{{ sg_name }}"
+        description: "{{ sg_description }}"
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region }}"
+        rules: "{{ sg_rules }}"
+        tags:
+          Name: "{{ sg_name }}"
+      register: sg
+    - name: Create an EC2 instance
+      ec2:
+        key_name: "{{ _key_name_ }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        vpc_subnet_id: "{{ subnet.subnet.id }}"
+        group_id: "{{ sg.group_id }}"
+        instance_tags: "{{ instance_tags }}"
+        assign_public_ip: true
+      register: ec2
+    - name: Add new instance to host group
+      ansible.builtin.add_host:
+        hostname: "{{ _hostname_ }}"
+        groupname: "{{ ec2.instances }}"
+    - name: Wait for SSH to come up
+      ansible.builtin.wait_for:
+        host: "{{ _host_ }}"
+        port: 22
+        delay: 60
