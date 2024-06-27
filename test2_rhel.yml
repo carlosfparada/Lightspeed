@@ -3,7 +3,7 @@
 - name: RHEL provisioning
   hosts: rhel9
   tasks:
-
+    
 
 
 
