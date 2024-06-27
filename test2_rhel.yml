@@ -1,15 +1,6 @@
 ---
 
-- name: RHEL provisioning
-  hosts: rhel9
+- name: Install rhel web server
+  hosts: rhel
   tasks:
-    
 
-
-
-
-    
-    
-    
-
-    
