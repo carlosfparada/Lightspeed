@@ -26,17 +26,17 @@
   - name: set fact
     set_fact: 
       token_content: "{{ token.content }}"
-      token_access: "{{ token_content.access_token }}"
+      access_token: "{{ token.contentt.access_token }}"
 
   - name: Debug token
     debug:
       var: token
 
-  - name: Debug token
+  - name: Debug token content
     debug:
       var: token.content
 
-  - name: Debug token_access
+  - name: Debug access_token
     debug:
       var: access_token
 
