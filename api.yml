@@ -25,6 +25,6 @@
 
   - name: Debug login
     debug:
-      var: token
+      var: token.content.access_token
 
 
