@@ -8,6 +8,7 @@
 
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
+  https://access.redhat.com/articles/3626371#busing-apis-for-red-hat-servicesb-1
   # - name: Get Playbook code
   #   ansible.builtin.uri:
   #     url: "https://sso.redhat.com/auth/realms/redhat-external"
@@ -17,18 +18,6 @@
   #     status_code: 200
   #     validate_certs: no
   #   register: login
-
-  - name: Login to SSO server
-    ansible.builtin.uri:
-      url: https://sso.redhat.com/auth/realms/redhat-external
-      method: POST
-      body:
-        username: user1
-        password: "{{ _password_ }}"
-      body_format: form-urlencoded
-      status_code: 200
-      return_content: true
-    register: login
 
   - name: Debug login
     debug:
