@@ -63,3 +63,7 @@
   - name: Debug output
     debug:
       var: output
+
+  - name: Debug predictions
+    debug:
+      var: predictionsa
