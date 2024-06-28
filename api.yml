@@ -42,7 +42,7 @@
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
   - name: Get completions
     ansible.builtin.uri:
-      url: "https://c.ai.ansible.redhat.com/api/v0/completions/"
+      url: "https://c.ai.ansible.redhat.com/api/v0/ai/completions/"
       method: POST
       return_content: yes
       status_code: 200
