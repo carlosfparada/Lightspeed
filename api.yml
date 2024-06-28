@@ -40,7 +40,7 @@
 
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
-  - name: Get 
+  - name: Get completions
     ansible.builtin.uri:
       url: "https://c.ai.ansible.redhat.com/api/v0/completions/"
       method: POST
@@ -49,7 +49,7 @@
       validate_certs: no
       headers:
         Content-Type: application/json
-        accept: application/json
+        Accept: application/json
       body_format: form-urlencoded
       body:
         prompt: |
@@ -58,6 +58,7 @@
           - hosts: all
             tasks:
               - name: Install nginx and nodejs 12 Packages
+
     register: output
 
   - name: Debug output
@@ -66,4 +67,4 @@
 
   - name: Debug predictions
     debug:
-      var: predictionsa
+      var: predictions
