@@ -48,8 +48,9 @@
       status_code: 200
       validate_certs: no
       headers:
-        Content-Type: application/json
-        Accept: application/json
+        Content-Type: "application/json"
+        Accept: "application/json"
+        Authorization: "Bearer {{ token }}"
       body_format: form-urlencoded
       body:
         prompt: |
