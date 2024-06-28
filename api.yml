@@ -26,10 +26,10 @@
   - name: set fact
     set_fact: 
       token_content: "{{ token.content | from_json }}"
-
-  - name: set fact
-    set_fact: 
       access_token: "{{ token_content.access_token }}"
+
+  # - name: set fact
+  #   set_fact: 
 
   - name: Debug token
     debug:
