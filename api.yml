@@ -37,6 +37,6 @@
 
   - name: Debug access_token
     debug:
-      var: access_token
+      msg: "{{ access_token }}"
 
 
