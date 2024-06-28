@@ -52,7 +52,7 @@
         Accept: "application/json"
         Authorization: "Bearer {{ token }}"
       body_format: form-urlencoded
-      body: '"{ prompt": "---\n- hosts: all\n  tasks:\n  - name: Install nginx and nodejs 12 Packages\n" }'
+      body: '{ "prompt": "---\n- hosts: all\n  tasks:\n  - name: Install nginx and nodejs 12 Packages\n" }'
       # body:
       #   prompt: |
       #     ---
