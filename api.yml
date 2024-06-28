@@ -70,4 +70,4 @@
 
   - name: Debug predictions
     debug:
-      var: predictions
+      var: output.predictions
