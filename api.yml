@@ -26,7 +26,7 @@
   - name: set fact
     set_fact: 
       token_content: "{{ token.content }}"
-      access_token: "{{ token.contentt.access_token }}"
+      access_token: "{{ token.content.access_token }}"
 
   - name: Debug token
     debug:
