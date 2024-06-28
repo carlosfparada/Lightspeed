@@ -23,7 +23,15 @@
         refresh_token: "{{offline_token }}"
     register: token
 
-  - name: Debug login
+  - name: Debug token
+    debug:
+      var: token
+
+  - name: Debug token
+    debug:
+      var: token.content
+
+  - name: Debug token_access
     debug:
       var: token.content.access_token
 
