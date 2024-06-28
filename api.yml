@@ -23,6 +23,11 @@
         refresh_token: "{{offline_token }}"
     register: token
 
+  - name: set facts
+    set_facts: 
+      token_access_json: "{{ token.content }}"
+      token_access: "{{ token_access_json.access_token }}"
+
   - name: Debug token
     debug:
       var: token
@@ -33,6 +38,6 @@
 
   - name: Debug token_access
     debug:
-      var: token.content.access_token
+      var: access_token
 
 
