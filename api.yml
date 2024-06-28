@@ -18,6 +18,10 @@
       validate_certs: no
     register: login
 
+
+
   - name: Debug login
     debug:
       var: login
+
+
