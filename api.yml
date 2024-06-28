@@ -8,17 +8,27 @@
 
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
-  - name: Get Playbook code
+  # - name: Get Playbook code
+  #   ansible.builtin.uri:
+  #     url: "https://sso.redhat.com/auth/realms/redhat-external"
+  #     method: POST
+  #     body: "grant_type=pass&client_id=admin-cli&username=mgmtuser&password=mgmtpass"
+  #     return_content: yes
+  #     status_code: 200
+  #     validate_certs: no
+  #   register: login
+
+  - name: Login to SSO server
     ansible.builtin.uri:
-      url: "https://sso.redhat.com/auth/realms/redhat-external"
+      url: https://sso.redhat.com/auth/realms/redhat-external
       method: POST
-      body: "grant_type=pass&client_id=admin-cli&username=mgmtuser&password=mgmtpass"
-      return_content: yes
+      body:
+        username: user1
+        password: "{{ _password_ }}"
+      body_format: form-urlencoded
       status_code: 200
-      validate_certs: no
+      return_content: true
     register: login
-
-
 
   - name: Debug login
     debug:
