@@ -91,6 +91,7 @@
         Accept: "application/json"
         Authorization: "Bearer {{ access_token }}"
     register: output
+    ignore_errors: true
 
   - name: Get AI Telemetry
     ansible.builtin.uri:
@@ -104,6 +105,7 @@
         Accept: "application/json"
         Authorization: "Bearer {{ access_token }}"
     register: output
+    ignore_errors: true
 
   - name: Debug output
     debug:
