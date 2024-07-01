@@ -47,7 +47,7 @@
       headers:
         Content-Type: "application/json"
         Accept: "application/json"
-        Authorization: "Bearer {{ access_token }}a"
+        Authorization: "Bearer {{ access_token }}"
       body_format: form-urlencoded
       body: ''
     register: output
