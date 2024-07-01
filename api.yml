@@ -21,17 +21,17 @@
         refresh_token: "{{ offline_token }}"
     register: token
 
-  - name: Debug token
-    debug:
-      var: token
+  # - name: Debug token
+  #   debug:
+  #     var: token
 
-  - name: set fact token_content
-    set_fact: 
-      token_content: "{{ token.content | from_json }}"
+  # - name: set fact token_content
+  #   set_fact: 
+  #     token_content: "{{ token.content | from_json }}"
 
-  - name: set fact access_token
-    set_fact: 
-      access_token: "{{ token_content.access_token }}"
+  # - name: set fact access_token
+  #   set_fact: 
+  #     access_token: "{{ token_content.access_token }}"
 
   - name: debug access_token
     debug:
