@@ -41,7 +41,7 @@
     ansible.builtin.uri:
       url: "https://api.access.redhat.com/management/v1/subscriptions/"
       #url: "https://api.access.redhat.com/management/v1/systems?limit=100"
-      method: POST
+      method: GET
       return_content: yes
       status_code: 200
       validate_certs: no
