@@ -53,8 +53,19 @@
       body: ''
     register: output
 
-  # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
-  # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
+  - name: Get Check status
+    ansible.builtin.uri:
+      url: "https://c.ai.ansible.redhat.com/check/status/"
+      method: GET
+      return_content: yes
+      status_code: 200
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept: "application/json"
+        Authorization: "Bearer {{ access_token }}"
+    register: output
+
   - name: Get AI Me
     ansible.builtin.uri:
       url: "https://c.ai.ansible.redhat.com/check/"
