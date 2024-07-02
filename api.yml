@@ -128,6 +128,32 @@
 
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
   # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
+  - name: Get AI Completion
+    ansible.builtin.uri:
+      url: "https://c.ai.ansible.redhat.com/api/v0/ai/completions/"
+      method: POST
+      return_content: yes
+      status_code: 200
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept: "application/json"
+        Authorization: "Bearer {{ access_token }}"
+      #body_format: form-urlencoded
+      body: '{ "prompt": "---\n- hosts: all\n  tasks:\n  - name: Install nginx and nodejs 12 Packages\n" }'
+      #body: 
+      #  prompt: "---\n- hosts: all\n  tasks:\n  - name: Install nginx and nodejs 12 Packages\n" }'
+      # body:
+      #   prompt: |
+      #     ---
+          
+      #     - hosts: all
+      #       tasks:
+      #         - name: Install nginx and nodejs 12 Packages
+    register: output
+
+  # https://github.com/ansible/ansible-ai-connect-service/blob/main/tools/openapi-schema/ansible-ai-connect-service.yaml
+  # https://github.com/ansible/ansible-ai-connect-service/blob/main/README.md
   - name: Get AI Generation
     ansible.builtin.uri:
       url: "https://c.ai.ansible.redhat.com/api/v0/ai/generations/"
