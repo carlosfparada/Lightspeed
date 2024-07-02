@@ -47,7 +47,7 @@
       validate_certs: no
       headers:
         Content-Type: "application/json"
-        Accept: "application/json"
+        accept: "application/json"
         Authorization: "Bearer {{ access_token }}"
       body_format: form-urlencoded
       body: ''
