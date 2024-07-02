@@ -37,7 +37,22 @@
     debug:
       msg: "{{ access_token }}"
 
-  - name: Test
+  - name: Test Systems
+    ansible.builtin.uri:
+      url: "https://api.access.redhat.com/management/v1/systems/"
+      method: GET
+      return_content: yes
+      status_code: 200
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        accept: "application/json"
+        Authorization: "Bearer {{ access_token }}"
+      body_format: form-urlencoded
+      body: ''
+    register: output
+
+  - name: Test Subscriptions
     ansible.builtin.uri:
       url: "https://api.access.redhat.com/management/v1/subscriptions/"
       #url: "https://api.access.redhat.com/management/v1/systems?limit=100"
