@@ -1,0 +1,16 @@
+---
+- name: Create VPC
+  amazon.aws.ec2_vpc_net:
+    name: my_vpc
+    cidr_block: 10.0.0.60/16
+    region: us-east-1
+    state: present
+  register: my_vpc
+
+- name: Create subnet
+  amazon.aws.ec2_vpc_subnet:
+    vpc_id: "{{ my_vpc.vpc.id }}"
+    cidr: 10.0.1.16/24
+    region: us-east-1
+    state: present
+  register: my_subnet
